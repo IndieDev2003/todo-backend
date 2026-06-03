@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 
 export const createTask = async (req: Request, res: Response) => {
   try {
-    const { title, description, priority } = req.body;
+    const {userId, title, description, priority } = req.body;
 
     if (!title || !description || !priority) {
       return res.status(400).json({
@@ -13,6 +13,7 @@ export const createTask = async (req: Request, res: Response) => {
     }
 
     const task = await Task.create({
+      userId,
       title,
       description,
       priority,
